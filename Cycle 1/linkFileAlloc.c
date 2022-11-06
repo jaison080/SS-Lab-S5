@@ -4,10 +4,9 @@ struct file
     char fname[10];
     int start, size, block[10];
 } f[10];
-main()
+int main()
 {
     int i, j, n;
-    clrscr();
     printf("Enter no. of files:");
     scanf("%d", &n);
     for (i = 0; i < n; i++)

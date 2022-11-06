@@ -1,4 +1,3 @@
-// Indexed File Allocation Algorithm
 #include <stdio.h>
 int main()
 {
