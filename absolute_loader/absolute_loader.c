@@ -9,8 +9,8 @@ void main()
     char name[10], line[50], name1[10], addr[10], rec[10], ch, staddr[10];
     printf("Enter Program Name : ");
     scanf("%s", name);
-    fp = fopen("INPUT.dat", "r");
-    fp1 = fopen("OUTPUT.dat", "w");
+    fp = fopen("input.txt", "r");
+    fp1 = fopen("output.txt", "w");
     fscanf(fp, "%s", line);
     for (i = 2, j = 0; i < 8, j < 6; i++, j++)
         name1[j] = line[i];
