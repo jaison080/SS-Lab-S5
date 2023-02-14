@@ -1,7 +1,7 @@
 #include <stdio.h>
 int block[20], process[20], isAllocated[20] = {0}, allocated[20], b, p, choice, flag = 0;
 void worstFit();
-int bwFinder(int startIndex, int pSize, int curValue, int mode);
+int bwFinder(int startIndex, int pSize, int curValue);
 void display();
 void worstFit()
 {
@@ -18,7 +18,7 @@ void worstFit()
             {
                 big = block[j];
                 isAllocated[j] = 1;
-                big = bwFinder(j, process[i], big, 2);
+                big = bwFinder(j, process[i], big);
                 allocated[i] = big;
                 break;
             }
@@ -30,12 +30,12 @@ void worstFit()
     }
     display();
 }
-int bwFinder(int startIndex, int pSize, int curValue, int mode)
+int bwFinder(int startIndex, int pSize, int curValue)
 {
     int lastBlock = startIndex;
     for (int i = startIndex + 1; i < b; i++)
     {
-        if (pSize <= block[i] && (mode == 1 ? block[i] < curValue : block[i] > curValue) && isAllocated[i] != 1)
+        if (pSize <= block[i] && block[i] > curValue && isAllocated[i] != 1)
         {
             isAllocated[lastBlock] = 0;
             lastBlock = i;
