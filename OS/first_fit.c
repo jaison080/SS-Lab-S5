@@ -1,7 +1,6 @@
 #include <stdio.h>
 int block[20], process[20], isAllocated[20] = {0}, allocated[20], b, p, choice, flag = 0;
 void firstFit();
-int bwFinder(int startIndex, int pSize, int curValue, int mode);
 void display();
 int main()
 {
@@ -65,19 +64,4 @@ void firstFit()
         }
     }
     display();
-}
-int bwFinder(int startIndex, int pSize, int curValue, int mode)
-{
-    int lastBlock = startIndex;
-    for (int i = startIndex + 1; i < b; i++)
-    {
-        if (pSize <= block[i] && (mode == 1 ? block[i] < curValue : block[i] > curValue) && isAllocated[i] != 1)
-        {
-            isAllocated[lastBlock] = 0;
-            lastBlock = i;
-            curValue = block[i];
-            isAllocated[i] = 1;
-        }
-    }
-    return curValue;
 }
