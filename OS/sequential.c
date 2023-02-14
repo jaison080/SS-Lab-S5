@@ -1,68 +1,45 @@
 #include <stdio.h>
-#include <stdlib.h>
-#define max 100
-
 int main()
 {
-    int n, f[max], bno, state = 0, sta, length;
-    for (int i = 0; i < max; i++)
+    char name[10][30];
+    int start[10], length[10], num;
+    printf("Enter the number of files to be allocated\n");
+    scanf("%d", &num);
+    int count = 0, k, j;
+    for (int i = 0; i < num; i++)
     {
-        f[i] = 0;
-    }
-    printf("Enter the number of blocks which are already allocated: \n");
-    scanf("%d", &n);
-    printf("Enter the blocks which are already allocated: \n");
-    for (int i = 0; i < n; i++)
-    {
-        scanf("%d", &bno);
-        f[bno] = 1;
-    }
-    while (state == 0)
-    {
-    a:
-        printf("Enter the start address and length of the file: \n");
-        scanf("%d%d", &sta, &length);
-        if (f[sta] == 0)
+        printf("Enter the name of the file %d\n", i + 1);
+        scanf("%s", &name[i][0]);
+        printf("Enter the start block of the file %d\n", i + 1);
+        scanf("%d", &start[i]);
+        printf("Enter the length of the file %d\n", i + 1);
+        scanf("%d", &length[i]);
+
+        for (j = 0, k = 1; j < num && k < num; j++, k++)
         {
-            for (int k = sta; k < (length + sta); k++)
+            if (start[j + 1] <= start[j] || start[j + 1] >= length[j])
             {
-                if (f[k] == 1)
-                {
-                    printf("Already allocated...");
-                    goto b;
-                    break;
-                }
-                else
-                {
-                    f[k] = 1;
-                    printf("%d--->%d", k, f[k]);
-                }
+            }
+            else
+            {
+                count++;
             }
         }
-        else
+        if (count == 1)
         {
-            printf("cannot allocate..\n");
-            goto b;
-        }
-
-    b:
-        printf("1. countinue add files 2. exit\n");
-        int ch;
-        scanf("%d", &ch);
-        if (ch == 1)
-        {
-            goto a;
-            continue;
-        }
-        else if (ch == 2)
-        {
-            break;
-            state = 1;
-        }
-        else
-        {
-            printf("Enter valid choice..");
-            goto b;
+            printf("%s cannot be allocated disk space\n", name[i]);
         }
     }
+    printf("File Allocation Table\n");
+    printf("%s%40s%40s\n", "File Name", "Start Block", "Length");
+    printf("%s%50d%50d\n", name[0], start[0], length[0]);
+
+    for (int i = 0, j = 1; i < num && j < num; i++, j++)
+    {
+        if (start[i + 1] <= start[i] || start[i + 1] >= length[i])
+        {
+            printf("%s%50d%50d\n", name[j], start[j], length[j]);
+        }
+    }
+    return 0;
 }
